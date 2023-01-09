@@ -1,0 +1,17 @@
+{
+	"root": true,
+	"extends": ["neon/common", "neon/node", "neon/typescript", "neon/prettier"],
+	"parserOptions": {
+		"project": "./tsconfig.json"
+	},
+	"ignorePatterns": ["**/dist/*"],
+	"env": {
+		"node": true,
+		"jest": true
+	},
+	"rules": {
+		"id-length": "off",
+		"n/prefer-global/process": "off",
+		"no-restricted-globals": "off"
+	}
+}
