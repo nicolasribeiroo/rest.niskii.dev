@@ -2,6 +2,8 @@ import type { INestApplication, OnModuleInit } from '@nestjs/common';
 import { Injectable, Logger } from '@nestjs/common';
 import Redis from 'ioredis';
 
+const logger = new Logger('RedisService')
+
 @Injectable()
 export class RedisService extends Redis implements OnModuleInit {
 	public constructor() {
@@ -14,7 +16,7 @@ export class RedisService extends Redis implements OnModuleInit {
 	}
 
 	public async onModuleInit() {
-		Logger.log('Redis connected', 'RedisService');
+		logger.log('Redis connected');
 	}
 
 	public async enableShutdownHooks(app: INestApplication) {

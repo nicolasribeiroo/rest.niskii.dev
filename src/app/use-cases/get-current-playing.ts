@@ -16,13 +16,11 @@ export class GetCurrentPlaying {
 
 			if (!parsedCache.playing)
 				return {
-					statusCode: 200,
 					playing: false,
 					cached: true,
 				};
 
 			return {
-				statusCode: 200,
 				playing: true,
 				data: parsedCache.data,
 				cached: true,
@@ -40,7 +38,6 @@ export class GetCurrentPlaying {
 		if (res.status === 204 || res.status > 400) {
 			await this.cacheManager.psetex(CURRENT_CACHE_KEY, CURRENT_CACHE_TIME, JSON.stringify({ playing: false }));
 			return {
-				statusCode: 200,
 				playing: false,
 				cached: false,
 			};
@@ -65,7 +62,6 @@ export class GetCurrentPlaying {
 			await this.cacheManager.psetex(CURRENT_CACHE_KEY, CURRENT_CACHE_TIME, JSON.stringify({ playing: false }));
 
 			return {
-				statusCode: 200,
 				playing: false,
 			};
 		}
@@ -73,7 +69,6 @@ export class GetCurrentPlaying {
 		await this.cacheManager.psetex(CURRENT_CACHE_KEY, CURRENT_CACHE_TIME, JSON.stringify({ playing: true, data }));
 
 		return {
-			statusCode: 200,
 			playing: true,
 			data,
 			cached: false,

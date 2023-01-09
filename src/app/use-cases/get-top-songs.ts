@@ -13,7 +13,6 @@ export class GetTopSongs {
 
 		if (cached)
 			return {
-				statusCode: 200,
 				tracks: JSON.parse(cached),
 				cached: true,
 			};
@@ -50,7 +49,6 @@ export class GetTopSongs {
 		await this.cacheManager.psetex(TOP_SONGS_CACHE_KEY, TOP_SONGS_CACHE_TIME, JSON.stringify(tracks));
 
 		return {
-			statusCode: 200,
 			tracks,
 			cached: false,
 		};
