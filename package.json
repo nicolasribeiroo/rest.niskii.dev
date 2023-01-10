@@ -6,15 +6,15 @@
 	"private": true,
 	"license": "MIT",
 	"scripts": {
-		"build": "nest build",
-		"start": "nest start",
-		"dev": "nest start --watch",
+		"build": "npx nest build",
+		"start": "npx nest start",
+		"dev": "npx nest start --watch",
 		"prod": "node dist/main",
-		"test": "jest",
-		"test:watch": "jest --watch",
-		"lint": "prettier --check . && eslint src --ext .mjs,.js,.cjs,.ts,.tsx --format=pretty",
-		"format": "prettier --write . && eslint src --ext .mjs,.js,.cjs,.ts,.tsx --fix --format=pretty",
-		"fmt": "yarn format"
+		"test": "npx jest",
+		"test:watch": "npx jest --watch",
+		"lint": "npx prettier --check . && eslint src --ext .mjs,.js,.cjs,.ts,.tsx --format=pretty",
+		"format": "npx prettier --write . && eslint src --ext .mjs,.js,.cjs,.ts,.tsx --fix --format=pretty",
+		"fmt": "npx format"
 	},
 	"dependencies": {
 		"@liaoliaots/nestjs-redis": "^9.0.5",
