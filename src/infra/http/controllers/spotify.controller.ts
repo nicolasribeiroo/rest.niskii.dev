@@ -9,12 +9,12 @@ export class SpotifyController {
 		private readonly getTopSongs: GetTopSongs,
 	) {}
 
-	@Get('current')
+	@Get('currently-playing')
 	public async current() {
 		return this.getCurrentPlaying.execute();
 	}
 
-	@Get('topSongs')
+	@Get('top-songs')
 	public async topSongs() {
 		return this.getTopSongs.execute();
 	}
