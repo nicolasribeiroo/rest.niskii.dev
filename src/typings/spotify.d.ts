@@ -12,6 +12,7 @@ type Song = {
 	artists: {
 		name: string;
 	}[];
+	duration_ms: number;
 	external_urls: {
 		spotify: string;
 	};
@@ -21,6 +22,8 @@ type Song = {
 export type NowPlaying = {
 	is_playing: boolean;
 	item: Song;
+	progress: number;
+	timestamp: number;
 };
 
 export type TopSongs = {

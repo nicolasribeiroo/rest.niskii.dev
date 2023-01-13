@@ -2,7 +2,7 @@ import type { INestApplication, OnModuleInit } from '@nestjs/common';
 import { Injectable, Logger } from '@nestjs/common';
 import Redis from 'ioredis';
 
-const logger = new Logger('RedisService')
+const logger = new Logger('RedisService');
 
 @Injectable()
 export class RedisService extends Redis implements OnModuleInit {

@@ -1,9 +1,12 @@
 import { GITHUB_URL, SPOTIFY_URL, TWITTER_URL } from '@helpers/index';
 import { Controller, Get, HttpCode, Res } from '@nestjs/common';
+import { Throttle } from '@nestjs/throttler';
 import { Response } from 'express';
 
 @Controller()
 export class HttpController {
+
+	@Throttle(10, 60)
 	@Get()
 	@HttpCode(200)
 	public routes() {
@@ -39,6 +42,7 @@ export class HttpController {
 		res.redirect(TWITTER_URL)
 	}
 
+	@Throttle(5, 60)
 	@Get('health')
 	@HttpCode(200)
 	public health() {

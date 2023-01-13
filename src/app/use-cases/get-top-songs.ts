@@ -1,4 +1,4 @@
-import { getAccessToken } from '@helpers/get-access-token';
+import { GetSpotifyAccessToken } from '@helpers/get-spotify-access-token';
 import { TOP_SONGS_CACHE_KEY, TOP_SONGS_CACHE_TIME } from '@helpers/index';
 import { RedisCacheRepository } from '@infra/cache/redis/repositories/redis-repository';
 import { HttpException, Injectable } from '@nestjs/common';
@@ -6,7 +6,10 @@ import type { TopSongs } from 'src/typings/spotify';
 
 @Injectable()
 export class GetTopSongs {
-	public constructor(private readonly cacheManager: RedisCacheRepository) {}
+	public constructor(
+		private readonly cacheManager: RedisCacheRepository,
+		private readonly getSpotifyAccessToken: GetSpotifyAccessToken,
+	) {}
 
 	public async execute() {
 		const cached = await this.cacheManager.get(TOP_SONGS_CACHE_KEY);
@@ -17,7 +20,7 @@ export class GetTopSongs {
 				cached: true,
 			};
 
-		const accessToken = await getAccessToken();
+		const accessToken = await this.getSpotifyAccessToken.execute();
 
 		const res = await fetch('https://api.spotify.com/v1/me/top/tracks', {
 			headers: {
@@ -32,7 +35,7 @@ export class GetTopSongs {
 		const json: TopSongs = await res.json();
 
 		const tracks = await Promise.all(
-			json.items.slice(0, 6).map(async (track) => ({
+			json.items.slice(0, 10).map(async (track) => ({
 				song: {
 					name: track.name,
 					artists: track.artists.map((artist) => artist.name).join(', '),
