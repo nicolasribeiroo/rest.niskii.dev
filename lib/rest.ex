@@ -2,6 +2,11 @@ defmodule Rest do
   use Application
 
   def start(_type, _args) do
+    unless Mix.env == :prod do
+      Dotenv.load
+      Mix.Task.run("loadconfig")
+    end
+
     import Supervisor.Spec, warn: false
 
     children = [
@@ -9,12 +14,15 @@ defmodule Rest do
         scheme: :http,
         plug: Rest.Router,
         options: [
-          port: Application.get_env(:rest, :http_port),
+          port: Application.fetch_env!(:rest, :http_port),
           dispatch: dispatch(),
           protocol_options: [idle_timeout: :infinity]
         ]
-      )
+      ),
+      {Redix, {Application.fetch_env!(:rest, :redis_uri), [name: :redix]}},
     ]
+
+    IO.puts("Starting Rest App on #{Application.fetch_env!(:rest, :http_port)}")
 
     opts = [strategy: :one_for_one, name: Rest.Supervisor]
     Supervisor.start_link(children, opts)

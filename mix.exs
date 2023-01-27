@@ -24,7 +24,11 @@ defmodule Rest.MixProject do
     [
       {:plug_cowboy, "~> 2.0"},
       {:poison, "~> 4.0"},
-      {:corsica, "~> 1.0"}
+      {:corsica, "~> 1.0"},
+      {:gen_registry, "~> 1.0"},
+      {:redix, "~> 1.1"},
+      {:httpoison, "~> 2.0"},
+      {:dotenv, "~> 3.0.0"}
     ]
   end
 end

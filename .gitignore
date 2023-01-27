@@ -31,3 +31,5 @@ rest-*.tar
 dump.rdb
 
 .DS_Store
+
+.env

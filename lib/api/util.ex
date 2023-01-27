@@ -1,4 +1,4 @@
-defmodule Rest.Router.Util do
+defmodule Rest.Api.Util do
   import Plug.Conn
 
   @spec respond(Plug.Conn.t(), {:ok}) :: Plug.Conn.t()

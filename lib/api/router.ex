@@ -1,7 +1,9 @@
 defmodule Rest.Api.Router do
   import Plug.Conn
 
-  alias Rest.Router.Util
+  alias Rest.Api.Routes.V1
+  alias Rest.Api.Routes.V1.Spotify
+  alias Rest.Api.Util
 
   use Plug.Router
 
@@ -14,6 +16,9 @@ defmodule Rest.Api.Router do
 
   plug(:match)
   plug(:dispatch)
+
+  forward("/v1", to: V1)
+  forward("/spotify", to: Spotify)
 
   match "/health" do
     send_resp(conn, 200, "OK")
